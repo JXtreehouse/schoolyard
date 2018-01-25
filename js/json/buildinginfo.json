@@ -1,0 +1,40 @@
+{
+    "titleinfo": { 
+        "title0": "位置",
+        "title1": "备注"
+    },
+    "details": [
+        {
+            "pos": "1号楼",
+            "comments": "5层"
+        },
+        {
+            "pos": "2号楼",
+            "comments": "5层"
+        },
+        {
+            "pos": "3号楼",
+            "comments": "5层"
+        },
+        {
+            "pos": "4号楼",
+            "comments": "5层"
+        },
+        {
+            "pos": "5号楼",
+            "comments": "5层"
+        },
+        {
+            "pos": "6号楼",
+            "comments": "5层"
+        },
+        {
+            "pos": "7号楼",
+            "comments": "5层"
+        },
+        {
+            "pos": "8号楼",
+            "comments": "5层"
+        }
+    ]
+}
