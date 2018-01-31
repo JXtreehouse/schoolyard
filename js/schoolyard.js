@@ -16,6 +16,7 @@ window.onload = function () {
         create_progress();
         schoolyard.buildings = app.buildings;
         schoolyard.facades = app.query('[building]'); // 全部的外立面
+        schoolyard.panels = app.outdoors.query
         schoolyard.cameraoff = [-40,30,11];
         is_inbuilding(false);
         console.log(schoolyard.facades);
@@ -26,6 +27,12 @@ window.onload = function () {
         //     }
         //
         // }) })
+        var linePoints = [];
+        linePoints.push(new THREE.Vector3(0, 10, 0));
+        linePoints.push(new THREE.Vector3(0, 10, 20));
+        linePoints.push(new THREE.Vector3(20, 10, 30));
+    
+        createLine(linePoints,app.debug.scene);
     }
     // 是否进入building
     function is_inbuilding( flag ) {
@@ -37,6 +44,24 @@ window.onload = function () {
         schoolyard.facades.forEach(function (t) {
             t.visible = !flag;
         })
+    }
+    function createLine( linepoints, scene ){
+        var geometry = new THREE.Geometry();
+        for(var i = 0; i < linepoints.length; i++){
+            geometry.vertices.push(linepoints[i]);
+        }
+        // 加箭头
+        var from = linepoints[linepoints.length-2];
+        var to = linepoints[linepoints.length-1];
+        var direction = to.clone().sub(from);
+        var length = direction.length();
+        var arrowHelper = new THREE.ArrowHelper(direction.normalize(), from, length, 0x0000ff);
+        scene.add( arrowHelper );
+        
+        var material = new THREE.LineBasicMaterial({ color: 0x0000ff,linewidth: 10 });
+        var line = new THREE.Line(geometry, material);
+        scene.add(line);
+//        return line;
     }
     function create_progress() {
         
@@ -183,7 +208,7 @@ window.onload = function () {
         console.log(num)
         is_inbuilding(true);
         // schoolyard.buildings[num].showFloors(true);
-        schoolyard.buildings[num].facades.forEach(function (t) { t.visible = true; })
+        schoolyard.buildings[num].facades.forEach(function (t) { t.visible = false; })
         app.query('[building='+num+']').forEach(function (t) { t.visible=true; })
         // console.log(schoolyard.buildings)
         var pos = schoolyard.buildings[num].position;
